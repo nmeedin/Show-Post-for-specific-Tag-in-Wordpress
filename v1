@@ -1,0 +1,25 @@
+ <?php
+                $args = array(
+                    'post_type' => 'post',
+                    'tag' =>'##########', // Here is where is being filtered by the tag you want
+                    'orderby' => 'id',
+                    'orderby' => 'date',
+					'order'   => 'DESC',
+					'posts_per_page' => '6',
+                );
+                $related_products = new WP_Query( $args );
+            ?>
+            <?php while ( $related_products -> have_posts() ) : $related_products -> the_post(); ?>
+			<div class="relpost-cat">       
+			<div class="relatedthumb"> 
+			<a href="<?php the_permalink(); ?>" class="related-product">
+                    <?php if( has_post_thumbnail() ) : ?>
+                        <?php the_post_thumbnail( 'medium', array( 'class' => 'related-product-img', 'alt' => get_the_title() ) ); ?>
+                    <?php endif; ?>
+                </a> 
+			</div>
+			<div class="relatedcontent">
+				<p class="rel-title"> <a href="<? the_permalink()?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></p>
+			</div>
+			</div>
+            <?php endwhile; wp_reset_query(); ?>
